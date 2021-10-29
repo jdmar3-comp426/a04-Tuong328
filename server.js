@@ -25,8 +25,8 @@ app.get("/app/", (req, res, next) => {
 // CREATE a new user (HTTP method POST) at endpoint /app/new/user
 app.post("/app/new/user", (req, res) => {
 	const stmt = db.prepare('INSERT INTO userinfo (user, pass) VALUES (?, ?)');
-	const info = stmt.run('James', "???");
-	res.status(200).json(info.changes);
+	const info = stmt.run('newtest', "38a7744f5523335db845ff1976bf4747");
+	res.status(200).json(info);
 })
 // READ a list of all users (HTTP method GET) at endpoint /app/users/
 app.get("/app/users", (req, res) => {	
@@ -39,7 +39,8 @@ app.get("/app/users/:id", (req, res) => {
 	const stmt = db.prepare("SELECT * FROM userinfo WHERE id = ?");
 	const name = stmt.get([req.params.id]);
 	console.log(name.changes);
-	res.status(200).json(name.changes);
+	console.log(req.params.id);
+	res.status(200).json(name);
 });
 // UPDATE a single user (HTTP method PATCH) at endpoint /app/update/user/:id
 
